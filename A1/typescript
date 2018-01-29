@@ -1,0 +1,53 @@
+Script started on Tue Jan 23 17:26:51 2018
+[?1034hbash-3.2$ make all
+gcc -Wall -std=c99 -o JonahKubathA1 JonahKubathA1.c
+[1mJonahKubathA1.c:55:16: [0m[0;1;35mwarning: [0m[1moverflow in expression; result is -1794967296 with type 'int' [-Winteger-overflow][0m
+  temp2 = 50000*50000;
+[0;1;32m               ^
+[0m[1mJonahKubathA1.c:59:16: [0m[0;1;35mwarning: [0m[1moverflow in expression; result is -694967296 with type 'int' [-Winteger-overflow][0m
+  temp2 = 60000*60000;
+[0;1;32m               ^
+[0m2 warnings generated.
+bash-3.2$ make use
+./JonahKubathA1
+Problem 1:
+Expected - 3.6000000000
+3.5999999046
+
+Problem 2:
+Expected - 0.1
+0.1000000015
+
+Problem 3:
+Expected - 0.5
+0.000000e+00
+Expected - 0.5
+5.000000e-01
+
+Problem 4:
+Expected - 9999999.4499999999
+Double - 9.999999e+06
+Float - 9999999.000000
+
+Problem 5:
+Expected - 900,000,000
+900000000
+Expected - 1,600,000,000
+1600000000
+Expected - 2,500,000,000
+-1794967296
+Expected - 3,600,000,000
+-694967296
+
+Problem 6:
+Expected - 100,000,000,000,000,000,000
+100000002004087734272.000000
+Expected - 100,000,000,003,500,000,000
+100000002004087734272.000000
+Expected - 103,500,000,000,000,000,000
+103500002601996386304.000000
+100000002004087734272.000000
+bash-3.2$ exit
+exit
+
+Script done on Tue Jan 23 17:26:59 2018
