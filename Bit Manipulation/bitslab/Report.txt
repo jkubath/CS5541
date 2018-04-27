@@ -1,0 +1,97 @@
+int bitAnd(int x, int y)
+  When ~() is applied to variables it changes the individual items to ~x
+  and also changes the logic.  This allows the 'and' to be changed to 'or'
+  x && y = ~(~x | ~y)
+
+int getByte(int x, int n) {
+  This shifts the current x to the left to remove the high bits.
+  Once the top two bytes are at the highest order, the high orders bits are
+  shifted to the right until they are the lowest order.
+
+int logicalShift(int x, int n) {
+  The goal of this function is to perform an arithmetic shift and then mask
+  off the added 1's if the value would be negative
+
+int bitCount(int x) {
+  Summary: The basic principle is to count bits by power of twos.
+  The first steps counts right bit in pairs of two by masking off
+  the left bit with 5 (0101).  The left bit is covered by shifting the
+  number to the right one bit (divide by 2) and then using the same mask.
+  This method is continued with the sequence of bits going up by a power of 2
+  each time.  1, 2, 4, 8, 16
+  Example: 395 in binary
+  0000000110001011 (0 0 0 0 0 0 0 1 1 0 0 0 1 0 1 1)
+  After the first step I have:
+  0000000101000110 (0+0 0+0 0+0 0+1 1+0 0+0 1+0 1+1) = 00 00 00 01 01 00 01 10
+  In the second step I have:
+  0000000100010011 ( 00+00   00+01   01+00   01+10 ) = 0000 0001 0001 0011
+  In the fourth step I have:
+  0000000100000100 (   0000+0001       0001+0011   ) = 00000001 00000100
+  In the last step I have:
+  0000000000000101 (       00000001+00000100       )
+
+int bang(int x) {
+  The middle section is meant to retrieve the most significant bit.  This
+  will be 1 with a negative, the flip of x, or a carry from the second most
+  left bit.  Once we have that bit, it is flipped again and anded with 1.
+  The only number to give a 0 to the left side of the & is 0.  This is because
+  when 0 is flipped it gives all 1's.  Add one to it and it becomes all 0's
+  with a 1 being carried out.  The 0 will then be flipped again and shifted.
+  We now have a 1 in the least significant bit & with 1 will return a 1 only
+  when x is 0.
+
+int tmin(void) {
+  The smallest negative number will have a 1 in the most significant bit
+  and 0's in the rest of the number.
+
+int fitsBits(int x, int n) {
+  Essentially dividing number by the number of bits to test.
+  If the number is 0 after the bit shift then the x can be held in n bits
+  if the number is 1 after the bit shift then it is larger than the n bits can
+  hold.
+
+int divpwr2(int x, int n) {
+    The mask is to determine which way to round.  When the number is positive,
+    the number must round down.  When the number is negative, the number must
+    rount upwards.
+    --Determine if the number is negative because then it will need to round
+    down.  Then determine if any of the bits are set from 0 to n-1.  These
+    bits would be a remainder when divided.  If any of them are set, the
+    negative must be rounded up which is equivalent to setting the 0 bit to 1.
+
+int negate(int x) {
+  Flip the bits and add one to perform the two's complement
+
+int isPositive(int x) {
+  Left side of the or: If the number is negative will return 1
+  right side of the or: is the number is 0 will return 1
+  Since this should return 0, we use the not.
+
+int isLessOrEqual(int x, int y) {
+  Subtract x from y by taking the two's complement and adding it to y.
+  Shift the result to get the sign bit.
+  if the result was negative (x > y) - sign bit is 1, return 0
+  if the result was positive (x <= y) - sign bit is 0, return 1;
+
+unsigned float_neg(unsigned uf) {
+  Set the mask to the sign bit.  Use the XOR to flip the sign bit
+
+
+unsigned float_i2f(int x) {
+ Sign: 1 bit
+ Exp : 8 bits
+ Frac: 24 << 24 - count
+ Summary: If the number is 0 or -0, return the number.
+ The number will then be changed to positive to avoid shifting in unwanted
+ 1's.  Shift the positive number to the right until a leading 1 is left.
+ Find the frac field by shifting the number to the right.  If the integer is
+ larger than 2^8, than the frac field cannot hold that many bits so it must
+ be rounded.  Round the number when the first bit to be rounded is 1 and
+ any of the other lower bits are 1 or the 0 bit position is 1 (number is odd).
+
+unsigned float_twice(unsigned uf) {
+ If the number is 0 or -0, return the number.  If the number is INF, -INF, or
+ NaN, return the number.  If the number is normalized, 1 can be added to the
+ exp field.  If the number passes that, then it is denormalized.  If the fracField
+ has a 1 in the highest bit, then this will be lost when it is shifted to the left.
+ This shift will cause a 1 to be in the exp field, which is what we want.
