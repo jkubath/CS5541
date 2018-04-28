@@ -5,4 +5,5 @@ Major Topics:
   2. Memory allocation
   3. Process creation, scheduling
   4. Thread creation, ULT and KLT
-  5. System security, clusters, virtual machines
+  5. Mutual Exclusion for shared memory
+  6. System security, clusters, virtual machines
